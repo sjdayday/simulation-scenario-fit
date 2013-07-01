@@ -1,0 +1,11 @@
+target
+.DS*
+ScenarioSet_*
+scenario_root
+parms.xml
+smallParms*
+testingInput.xml
+data.*
+baselineSpace.xml
+comparedSpace.xml
+parameterSpace.xml
