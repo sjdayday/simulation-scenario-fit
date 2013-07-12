@@ -1,0 +1,51 @@
+!contents -R2 -g -p -f -h
+
+[[Back][FrontPage]]
+
+!path fitlibrary-2.0.jar
+!path fitnesse.jar
+!path lib/*.jar
+!define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
+
+
+!path ${SIMTARGET}/classes/
+!path ${SIMTARGET}/test-classes/
+!path ${M2REPO}/org/grayleaves/simulation-scenario/1.0-SNAPSHOT/simulation-scenario-1.0-SNAPSHOT.jar
+
+!3 Notes on the path statements: 
+
+The path statements will be used for any child pages from this one.  (Click on "add child" to the right of the page title above, or any child page of this one.) 
+
+The first set of path statements are needed to invoke the fitlibrary code in place of the native fitnesse code, and are needed for the top level page of any project to be tested with fitlibrary.
+
+The second set of path statements are specific to the project to be tested, and must include the fixtures to be tested, and any supporting paths from the current project, as well as any needed jars from your local maven repository
+
+M2REPO and SIMTARGET are system variables.  M2REPO is a pointer to your local Maven repository, and could be re-used across multiple projects, e.g., export M2REPO=/Users/stevedoubleday/.m2/repository
+
+If a given variable is not properly set, you'll see something like this:  "undefined variable: SIMTARGET/classes"
+
+SIMTARGET is a pointer to the target directory in the maven project for this project, simulation-scenario-fit.  An easy way to manage this is to define the variable on the command that starts an instance of fitnesse for testing that specific project (see below)
+
+
+!3 Notes on Fitnesse Instances
+
+In general, you'll want to run a different instance of fitnesse for each project you intend to test with fitnesse/fitlibrary.  Here's an example, tailored to run tests for the simulation-scenario-fit project:
+
+java -Xmx256m  -Xms256m -XX:+HeapDumpOnOutOfMemoryError -DSIMTARGET=/Users/stevedoubleday/git/simulation-scenario-fit/target -jar fitnesse.jar  -p 8081 -e 0  -d /Users/stevedoubleday/git/simulation-scenario-fit/src/test/resources
+
+The first three options are standard java options to give more memory than the default and to request a heap dump in the event of out of memory conditions:  -Xmx256m  -Xms256m -XX:+HeapDumpOnOutOfMemoryError
+
+The next option, -D,  creates a variable SIMTARGET to be used in the !path statements as above, and points it to the project Maven "target" directory as configured on my machine:  -DSIMTARGET=/Users/stevedoubleday/git/simulation-scenario-fit/target 
+
+Next, fitnesse is invoked; the remaining options are specific to fitnesse, and are documented [[here][FitNesse.UserGuide.CommandLineOption]] (more details scattered through the user guide):  -jar fitnesse.jar
+
+You'll want a different port number for each instance of fitnesse you run:  -p 8081
+
+Pages aren't versioned with fitnesse's own versioning system:  -e 0   
+If you are editing tests often, you may want to change this to some positive number, as this makes it convenient to recover a recently saved version of a page, by clicking on "Versions" in the left Nav.  In that case, however, you will see zip files accumulating in the directory of each page, representing each saved version.  These are not automatically deleted when they expire; you would have to clean them up yourself.  There's a "*.zip" entry in the .gitignore file to suppress saving these to git.  
+
+The -d option points to the project directory where the fitnesse/fitlibrary tests will be created:  -d /Users/stevedoubleday/git/simulation-scenario-fit/src/test/resources
+The suggested convention is to put them under src/test/resources.  When fitnesse is first started with -d pointing to a new project directory, it will create the FitnesseRoot directory; all the fitnesse wiki pages will be created under that directory, and should be added to git as part of normal synchronization processes.   
+
+
+

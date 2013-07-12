@@ -1,0 +1,39 @@
+!contents -R2 -g -p -f -h
+
+[[back][.FrontPage]]
+!2 List of all fixtures and their operations
+
+!3 [[Parameter Space][SimulationScenarioFitAcceptanceTests.ParameterSpace]]  :  Build parameter space and add parameters to it
+|org.grayleaves.fit.ParameterSpaceFixture|
+|Build parameter space|
+|Array parameter named|Famous people|with values|Sam Spade, Fred Flintstone, Mary Queen of Scots|
+|Current class is|org.grayleaves.utility.TestingBean|
+|Static String field to update is|STRING_PARM|
+|Static Integer field to update is|INT_PARM|
+|Static Boolean field to update is|BOOLEAN_PARM|
+|Static Byte field to update is|BYTE_PARM|
+|Static Double field to update is|DOUBLE_PARM|
+|Static Float field to update is|FLOAT_PARM|
+|Static Long field to update is|LONG_PARM|
+|Static Short field to update is|SHORT_PARM|
+|Static Character field to update is|CHAR_PARM|
+|Static String field to update is|STRING_PARM|
+|Range parameter named|degrees centigrade|from|0|to|100|by|10|
+
+Show the parameters in the parameter space
+|Parameters|
+|name|
+|Famous people|
+|degrees centigrade|
+
+Verify the number of parameter points in the parameter space.  
+|check|Parameter space size|33|
+
+Rebuild parameter space from an existing file (full path name).  
+|Rebuild parameter space from file|/Users/stevedoubleday/.../parameterSpace.xml|
+
+Parameter space source is either named input or a file.  
+|show|Parameter space source|
+
+
+

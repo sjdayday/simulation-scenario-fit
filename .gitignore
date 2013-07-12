@@ -1,11 +1,8 @@
 target
+src/target
+src/test/resources/FitNesseRoot/files/testResults
+src/test/resources/FitNesseRoot/RecentChanges
+src/test/resources/FitNesseRoot/ErrorLogs
+fitnesse-20110104/FitNesseRoot/RecentChanges
 .DS*
-ScenarioSet_*
-scenario_root
-parms.xml
-smallParms*
-testingInput.xml
-data.*
-baselineSpace.xml
-comparedSpace.xml
-parameterSpace.xml
+*.zip

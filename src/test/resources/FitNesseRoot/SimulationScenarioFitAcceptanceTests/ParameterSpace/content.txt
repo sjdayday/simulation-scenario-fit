@@ -1,0 +1,135 @@
+!contents -R2 -g -p -f -h
+
+[[back][.SimulationScenarioFitAcceptanceTests ]]
+
+!2 Parameter Space
+
+|org.grayleaves.fit.utility.ParameterSpaceFixture|
+
+A !-ParameterSpace-! is a set of Parameters.  A Parameter controls the behavior of one aspect of a Model, by taking either a range of values or a set of values.  The collection of all Parameters across all their possible values constitutes the !-ParameterSpace-!.  A Parameter Point is defined by a single value for each parameter in the parameter space. 
+
+First let's create a !-ParameterSpace-! 
+
+|Build parameter space named|sample of size 33| 
+
+Next we add parameters.  Each parameter has a name (unique in the parameter space), a set of values that will be assigned to it (either an array or a range of values), and a target in the underlying model to update.  We'll go into detail below, but here are a couple of examples:
+
+|Array parameter named|Famous people|with values|Sam Spade, Fred Flintstone, Mary Queen of Scots|
+|Current class is|org.grayleaves.utility.TestingBean|
+|Static String field to update is|STRING_PARM|
+
+|Range parameter named|degrees centigrade|from|0|to|100|by|10|
+|Static Integer field to update is|INT_PARM|
+
+We've added two parameters to our parameter space; both are static fields in class !-TestingBean-!. Let's see what we have so far:
+
+|Parameters|
+|name|
+|Famous people|
+|degrees centigrade|
+
+The size of the parameter space is the number of parameter points it has.  This is the product of the number of values that each parameter can take, multiplied for each parameter in turn.  In this case, the size is 3 x 11 (3 "famous people", 11 values in the "degrees centigrade" range (0, 10, 20 ... 100))
+
+|check|Parameter space size|33|
+
+The parameter space can either be built from the input above, or rebuilt from an existing file by removing "|note" from the line below, and entering the appropriate full path name.  When a parameter space is rebuilt, the input values from above are ignored.  ''Note: the only way to see the input that is being used is to look in the xml file that is being used to rebuild the parameter space.''   
+
+|note|Rebuild parameter space from file|/Users/stevedoubleday/.../parameterSpace.xml|
+
+The parameter space source is either the parameter space name given when the parameter values are input above, or the name of the file from which it is being rebuilt.
+
+|show|Parameter space source|
+
+
+
+On to the details...
+
+!2 Parameter Values
+
+For each parameter, first we give it a name and its possible values.  The values are defined either as a set (an array), or as a range. 
+
+!3 Array parameter
+
+We may define an array of permissible values, separated by commas: 
+
+|Array parameter named|Famous people|with values|Sam Spade, Fred Flintstone, Mary Queen of Scots|
+
+|Array parameter named|magic numbers|with values|4, 7, 13, -1|
+
+The elements of the array will be interpreted as a particular type (e.g., String, Integer) in the next step, when we define the parameter target.
+
+!3 Range parameter
+
+We may also define a range of values:
+
+|Range parameter named|degrees centigrade|from|0|to|100|by|10|
+
+Currently, range parameter values can only be integers.   
+
+!2 Parameter targets
+
+Once we've defined the parameter values, we identify the target in the Model to update.  There are two types of parameter targets:  
+
+A Static Parameter is a static field (class variable) in some class.  ''Note:  because a parameter can take multiple values, the variable cannot be "final".''
+
+A Property Parameter is a parameter is some property file. (TODO: examples)
+
+!3 Static parameter targets
+
+First we identify the class where the static field exists.  All subsequent static parameters will refer to this class until the next "current class is..." statement.
+
+|Current class is|org.grayleaves.utility.TestingBean|
+
+Within the !-TestingBean-! class, we treat several fields as parameters, by specifying the variable type to update, and its name.  The Java primitive types and their counterpart wrapping (boxed) classes are supported, as well as String.  The !-TestingBean-! class has variables that illustrate all the supported types.
+
+Integers -- the first field is primitive (int); the second is wrapped (Integer)
+
+|Static Integer field to update is|INT_PARM|
+|Static Integer field to update is|INTEGER_PARM|
+
+Booleans...
+|note|Array parameter named|True or false|with values|false, true, true, false|
+|Static Boolean field to update is|BOOLEAN_PARM|
+|Static Boolean field to update is|BOOLEAN_BOXED_PARM|
+
+etc...
+|Static Byte field to update is|BYTE_PARM|
+|Static Byte field to update is|BYTE_BOXED_PARM|
+|Static Double field to update is|DOUBLE_PARM|
+|Static Double field to update is|DOUBLE_BOXED_PARM|
+|Static Float field to update is|FLOAT_PARM|
+|Static Float field to update is|FLOAT_BOXED_PARM|
+|Static Long field to update is|LONG_PARM|
+|Static Long field to update is|LONG_BOXED_PARM|
+|Static Short field to update is|SHORT_PARM|
+|Static Short field to update is|SHORT_BOXED_PARM|
+|Static Character field to update is|CHAR_PARM|
+|Static Character field to update is|CHARACTER_PARM|
+|Static String field to update is|STRING_PARM|
+
+Non-public fields, final fields or non-static fields cannot be static parameter targets. 
+
+|Reject|Static String field to update is|NON_PUBLIC_STRING_PARM|
+|Reject|Static String field to update is|FINAL_STRING_PARM|
+|Reject|Static String field to update is|nonStaticStringParm|
+
+If you misspell the field name, or identify it as the wrong type, that will also be rejected.
+
+|Reject|Static String field to update is|SOME_NONEXISTENT_FIELD|
+|Reject|Static Integer field to update is|STRING_PARM|
+
+!3 Property parameter targets
+
+TODO...
+
+!2 Adding parameters
+
+Adding a parameter takes two steps:
+ 1 Define the parameter values (array or range)
+ 2 Define the parameter target to update (static or property)
+
+These two steps can be repeated as many times as needed to add all the parameters in the parameter space.
+
+If the target is static, it must be preceded by designating the class where the target resides ("current class...").  The current class designation stays in effect until changed, so only needs to be specified once for all the parameter targets in a given class. 
+
+
