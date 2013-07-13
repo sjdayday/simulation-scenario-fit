@@ -4,7 +4,7 @@
 
 !2 Parameter Space
 
-|org.grayleaves.fit.utility.ParameterSpaceFixture|
+|org.grayleaves.utility.fit.ParameterSpaceFixture|
 
 A !-ParameterSpace-! is a set of Parameters.  A Parameter controls the behavior of one aspect of a Model, by taking either a range of values or a set of values.  The collection of all Parameters across all their possible values constitutes the !-ParameterSpace-!.  A Parameter Point is defined by a single value for each parameter in the parameter space. 
 

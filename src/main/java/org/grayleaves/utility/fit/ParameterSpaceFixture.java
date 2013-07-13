@@ -1,6 +1,6 @@
 /* Copyright (c) 2013, Regents of the University of California.  See License.txt for details */
 
-package org.grayleaves.fit.utility;
+package org.grayleaves.utility.fit;
 
 import java.io.File;
 import java.util.ArrayList;

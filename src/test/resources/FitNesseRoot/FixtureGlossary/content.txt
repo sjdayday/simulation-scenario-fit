@@ -4,7 +4,7 @@
 !2 List of all fixtures and their operations
 
 !3 [[Parameter Space][SimulationScenarioFitAcceptanceTests.ParameterSpace]]  :  Build parameter space and add parameters to it
-|org.grayleaves.fit.ParameterSpaceFixture|
+|org.grayleaves.utility.fit.ParameterSpaceFixture|
 |Build parameter space|
 |Array parameter named|Famous people|with values|Sam Spade, Fred Flintstone, Mary Queen of Scots|
 |Current class is|org.grayleaves.utility.TestingBean|
