@@ -6,7 +6,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-//import org.apache.log4j.Logger;
 import org.grayleaves.utility.ArrayParameter;
 import org.grayleaves.utility.Input;
 import org.grayleaves.utility.ParameterSpace;
@@ -22,6 +21,7 @@ import fit.Fixture;
 import fit.TypeAdapter;
 import fitlibrary.ArrayFixture;
 import fitlibrary.DoFixture;
+//import org.apache.log4j.Logger;
 
 public class ParameterSpaceFixture extends DoFixture
 {
@@ -53,6 +53,10 @@ public class ParameterSpaceFixture extends DoFixture
 		ParameterSpacePersister<ParameterSpace> spacePersister = new ParameterSpacePersister<ParameterSpace>();
 		rebuiltSpace = spacePersister.load(ParameterSpace.class, new File(filename));
 		rebuiltSpace.setFilename(filename); 
+	}
+	public void iterateParameterSpaceUsingGridAtDepthLevelWithNumberOfPointsAroundOriginalPoint(int level, int factor) 
+	{ 
+		space.useGridIteration(level, factor);
 	}
 	public void currentPackageIs(String packageName)
 	{
