@@ -4,5 +4,6 @@ src/test/resources/FitNesseRoot/files/testResults
 src/test/resources/FitNesseRoot/RecentChanges
 src/test/resources/FitNesseRoot/ErrorLogs
 fitnesse-20110104/FitNesseRoot/RecentChanges
+fitnesse-20110104/ProtectionFixture.log
 .DS*
 *.zip
